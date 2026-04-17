@@ -7,12 +7,16 @@
       "RelativeMoniker": "D:0:0:{51692C04-6C3D-44F8-97E8-694F885ED56F}|InfiniteTicTacToe\\InfiniteTicTacToe.csproj|solutionrelative:infinitetictactoe\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{51692C04-6C3D-44F8-97E8-694F885ED56F}|InfiniteTicTacToe\\InfiniteTicTacToe.csproj|c:\\users\\admin\\source\\repos\\infinitetictactoe\\infinitetictactoe\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51692C04-6C3D-44F8-97E8-694F885ED56F}|InfiniteTicTacToe\\InfiniteTicTacToe.csproj|solutionrelative:infinitetictactoe\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{51692C04-6C3D-44F8-97E8-694F885ED56F}|InfiniteTicTacToe\\InfiniteTicTacToe.csproj|c:\\users\\admin\\source\\repos\\infinitetictactoe\\infinitetictactoe\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{51692C04-6C3D-44F8-97E8-694F885ED56F}|InfiniteTicTacToe\\InfiniteTicTacToe.csproj|solutionrelative:infinitetictactoe\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{51692C04-6C3D-44F8-97E8-694F885ED56F}|InfiniteTicTacToe\\InfiniteTicTacToe.csproj|c:\\users\\admin\\source\\repos\\infinitetictactoe\\infinitetictactoe\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{51692C04-6C3D-44F8-97E8-694F885ED56F}|InfiniteTicTacToe\\InfiniteTicTacToe.csproj|solutionrelative:infinitetictactoe\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{51692C04-6C3D-44F8-97E8-694F885ED56F}|InfiniteTicTacToe\\InfiniteTicTacToe.csproj|c:\\users\\admin\\source\\repos\\infinitetictactoe\\infinitetictactoe\\viewmodels\\stringmatchesconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51692C04-6C3D-44F8-97E8-694F885ED56F}|InfiniteTicTacToe\\InfiniteTicTacToe.csproj|solutionrelative:infinitetictactoe\\viewmodels\\stringmatchesconverter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{51692C04-6C3D-44F8-97E8-694F885ED56F}|InfiniteTicTacToe\\InfiniteTicTacToe.csproj|c:\\users\\admin\\source\\repos\\infinitetictactoe\\infinitetictactoe\\victorywindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -23,6 +27,10 @@
       "RelativeMoniker": "D:0:0:{51692C04-6C3D-44F8-97E8-694F885ED56F}|InfiniteTicTacToe\\InfiniteTicTacToe.csproj|solutionrelative:infinitetictactoe\\victorywindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{51692C04-6C3D-44F8-97E8-694F885ED56F}|InfiniteTicTacToe\\InfiniteTicTacToe.csproj|c:\\users\\admin\\source\\repos\\infinitetictactoe\\infinitetictactoe\\commands\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51692C04-6C3D-44F8-97E8-694F885ED56F}|InfiniteTicTacToe\\InfiniteTicTacToe.csproj|solutionrelative:infinitetictactoe\\commands\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{51692C04-6C3D-44F8-97E8-694F885ED56F}|InfiniteTicTacToe\\InfiniteTicTacToe.csproj|c:\\users\\admin\\source\\repos\\infinitetictactoe\\infinitetictactoe\\models\\gameengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{51692C04-6C3D-44F8-97E8-694F885ED56F}|InfiniteTicTacToe\\InfiniteTicTacToe.csproj|solutionrelative:infinitetictactoe\\models\\gameengine.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -31,12 +39,12 @@
       "RelativeMoniker": "D:0:0:{51692C04-6C3D-44F8-97E8-694F885ED56F}|InfiniteTicTacToe\\InfiniteTicTacToe.csproj|solutionrelative:infinitetictactoe\\models\\cell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{51692C04-6C3D-44F8-97E8-694F885ED56F}|InfiniteTicTacToe\\InfiniteTicTacToe.csproj|c:\\users\\admin\\source\\repos\\infinitetictactoe\\infinitetictactoe\\commands\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{51692C04-6C3D-44F8-97E8-694F885ED56F}|InfiniteTicTacToe\\InfiniteTicTacToe.csproj|solutionrelative:infinitetictactoe\\commands\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{51692C04-6C3D-44F8-97E8-694F885ED56F}|InfiniteTicTacToe\\InfiniteTicTacToe.csproj|c:\\users\\admin\\source\\repos\\infinitetictactoe\\infinitetictactoe\\models\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{51692C04-6C3D-44F8-97E8-694F885ED56F}|InfiniteTicTacToe\\InfiniteTicTacToe.csproj|solutionrelative:infinitetictactoe\\models\\enums.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{51692C04-6C3D-44F8-97E8-694F885ED56F}|InfiniteTicTacToe\\InfiniteTicTacToe.csproj|c:\\users\\admin\\source\\repos\\infinitetictactoe\\infinitetictactoe\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{51692C04-6C3D-44F8-97E8-694F885ED56F}|InfiniteTicTacToe\\InfiniteTicTacToe.csproj|solutionrelative:infinitetictactoe\\assemblyinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -51,19 +59,45 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "StringMatchesConverter.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\InfiniteTicTacToe\\InfiniteTicTacToe\\ViewModels\\StringMatchesConverter.cs",
+              "RelativeDocumentMoniker": "InfiniteTicTacToe\\ViewModels\\StringMatchesConverter.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\InfiniteTicTacToe\\InfiniteTicTacToe\\ViewModels\\StringMatchesConverter.cs",
+              "RelativeToolTip": "InfiniteTicTacToe\\ViewModels\\StringMatchesConverter.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T11:48:12.175Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\InfiniteTicTacToe\\InfiniteTicTacToe\\ViewModels\\MainViewModel.cs",
+              "RelativeDocumentMoniker": "InfiniteTicTacToe\\ViewModels\\MainViewModel.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\InfiniteTicTacToe\\InfiniteTicTacToe\\ViewModels\\MainViewModel.cs",
+              "RelativeToolTip": "InfiniteTicTacToe\\ViewModels\\MainViewModel.cs",
+              "ViewState": "AgIAAPsAAAAAAAAAAAAmwBABAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T15:12:11.209Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "VictoryWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\InfiniteTicTacToe\\InfiniteTicTacToe\\VictoryWindow.xaml.cs",
               "RelativeDocumentMoniker": "InfiniteTicTacToe\\VictoryWindow.xaml.cs",
               "ToolTip": "C:\\Users\\Admin\\source\\repos\\InfiniteTicTacToe\\InfiniteTicTacToe\\VictoryWindow.xaml.cs",
               "RelativeToolTip": "InfiniteTicTacToe\\VictoryWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABwAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-16T15:37:09.726Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "VictoryWindow.xaml",
               "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\InfiniteTicTacToe\\InfiniteTicTacToe\\VictoryWindow.xaml",
               "RelativeDocumentMoniker": "InfiniteTicTacToe\\VictoryWindow.xaml",
@@ -71,32 +105,6 @@
               "RelativeToolTip": "InfiniteTicTacToe\\VictoryWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2026-04-16T15:36:54.768Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MainViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\InfiniteTicTacToe\\InfiniteTicTacToe\\ViewModels\\MainViewModel.cs",
-              "RelativeDocumentMoniker": "InfiniteTicTacToe\\ViewModels\\MainViewModel.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\InfiniteTicTacToe\\InfiniteTicTacToe\\ViewModels\\MainViewModel.cs",
-              "RelativeToolTip": "InfiniteTicTacToe\\ViewModels\\MainViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIYAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T15:12:11.209Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "GameEngine.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\InfiniteTicTacToe\\InfiniteTicTacToe\\Models\\GameEngine.cs",
-              "RelativeDocumentMoniker": "InfiniteTicTacToe\\Models\\GameEngine.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\InfiniteTicTacToe\\InfiniteTicTacToe\\Models\\GameEngine.cs",
-              "RelativeToolTip": "InfiniteTicTacToe\\Models\\GameEngine.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAiwDoAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T15:10:57.991Z",
               "EditorCaption": ""
             },
             {
@@ -113,13 +121,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "MainWindow.xaml.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\InfiniteTicTacToe\\InfiniteTicTacToe\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "InfiniteTicTacToe\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\Admin\\source\\repos\\InfiniteTicTacToe\\InfiniteTicTacToe\\MainWindow.xaml.cs",
               "RelativeToolTip": "InfiniteTicTacToe\\MainWindow.xaml.cs",
-              "ViewState": "AgIAADgAAAAAAAAAAAAmwEcAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAmwFQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-16T15:06:28.028Z",
               "EditorCaption": ""
@@ -127,41 +135,66 @@
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "Cell.cs",
-              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\InfiniteTicTacToe\\InfiniteTicTacToe\\Models\\Cell.cs",
-              "RelativeDocumentMoniker": "InfiniteTicTacToe\\Models\\Cell.cs",
-              "ToolTip": "C:\\Users\\Admin\\source\\repos\\InfiniteTicTacToe\\InfiniteTicTacToe\\Models\\Cell.cs",
-              "RelativeToolTip": "InfiniteTicTacToe\\Models\\Cell.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAiwCQAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-16T15:10:43.866Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
               "Title": "RelayCommand.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\InfiniteTicTacToe\\InfiniteTicTacToe\\Commands\\RelayCommand.cs",
               "RelativeDocumentMoniker": "InfiniteTicTacToe\\Commands\\RelayCommand.cs",
               "ToolTip": "C:\\Users\\Admin\\source\\repos\\InfiniteTicTacToe\\InfiniteTicTacToe\\Commands\\RelayCommand.cs",
               "RelativeToolTip": "InfiniteTicTacToe\\Commands\\RelayCommand.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwCAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-16T15:11:50.561Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "GameEngine.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\InfiniteTicTacToe\\InfiniteTicTacToe\\Models\\GameEngine.cs",
+              "RelativeDocumentMoniker": "InfiniteTicTacToe\\Models\\GameEngine.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\InfiniteTicTacToe\\InfiniteTicTacToe\\Models\\GameEngine.cs",
+              "RelativeToolTip": "InfiniteTicTacToe\\Models\\GameEngine.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T15:10:57.991Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 8,
+              "Title": "Cell.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\InfiniteTicTacToe\\InfiniteTicTacToe\\Models\\Cell.cs",
+              "RelativeDocumentMoniker": "InfiniteTicTacToe\\Models\\Cell.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\InfiniteTicTacToe\\InfiniteTicTacToe\\Models\\Cell.cs",
+              "RelativeToolTip": "InfiniteTicTacToe\\Models\\Cell.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwCQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T15:10:43.866Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "Enums.cs",
               "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\InfiniteTicTacToe\\InfiniteTicTacToe\\Models\\Enums.cs",
               "RelativeDocumentMoniker": "InfiniteTicTacToe\\Models\\Enums.cs",
               "ToolTip": "C:\\Users\\Admin\\source\\repos\\InfiniteTicTacToe\\InfiniteTicTacToe\\Models\\Enums.cs",
               "RelativeToolTip": "InfiniteTicTacToe\\Models\\Enums.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-04-16T15:10:14.505Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AssemblyInfo.cs",
+              "DocumentMoniker": "C:\\Users\\Admin\\source\\repos\\InfiniteTicTacToe\\InfiniteTicTacToe\\AssemblyInfo.cs",
+              "RelativeDocumentMoniker": "InfiniteTicTacToe\\AssemblyInfo.cs",
+              "ToolTip": "C:\\Users\\Admin\\source\\repos\\InfiniteTicTacToe\\InfiniteTicTacToe\\AssemblyInfo.cs",
+              "RelativeToolTip": "InfiniteTicTacToe\\AssemblyInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-17T11:16:28.968Z"
             }
           ]
         }

@@ -21,14 +21,18 @@ namespace InfiniteTicTacToe.ViewModels
         private int _secondsElapsed;
         private string _timerText = "00:00";
         private bool _isPlaying = false;
+        private bool _isAiThinking = false;
 
-        private string _player1Name = "";
-        private string _player2Name = "";
+        private string _player1Name = "Гравець 1";
+        private string _player2Name = "Гравець 2";
         private string _currentPlayerStatus = "Очікування...";
         private string _playerColor = "#7f8fa6";
+        private string _gameMode = "2 гравці";
 
-        public const int GridWidth = 15;
-        public const int GridHeight = 15;
+        private bool _isCoinTossVisible;
+        private bool _isFlipping;
+        private string _coinText = "?";
+        private string _tossStatusText = "";
 
         public ObservableCollection<Cell> DrawnCells { get; set; }
         public RelayCommand MakeMoveCommand { get; set; }
@@ -37,21 +41,19 @@ namespace InfiniteTicTacToe.ViewModels
         public RelayCommand ResetCommand { get; set; }
 
         public string TimerText { get => _timerText; set { _timerText = value; OnPropertyChanged(); } }
-
-        public string Player1Name
-        {
-            get => _player1Name;
-            set { _player1Name = value; OnPropertyChanged(); CommandManager.InvalidateRequerySuggested(); }
-        }
-
-        public string Player2Name
-        {
-            get => _player2Name;
-            set { _player2Name = value; OnPropertyChanged(); CommandManager.InvalidateRequerySuggested(); }
-        }
-
+        public string Player1Name { get => _player1Name; set { _player1Name = value; OnPropertyChanged(); OnPlayerNamesChanged(); } }
+        public string Player2Name { get => _player2Name; set { _player2Name = value; OnPropertyChanged(); OnPlayerNamesChanged(); } }
         public string CurrentPlayerStatus { get => _currentPlayerStatus; set { _currentPlayerStatus = value; OnPropertyChanged(); } }
         public string PlayerColor { get => _playerColor; set { _playerColor = value; OnPropertyChanged(); } }
+        public string GameMode { get => _gameMode; set { _gameMode = value; OnPropertyChanged(); OnPlayerNamesChanged(); } }
+        public bool IsAiMode => GameMode == "1 гравець";
+        public bool IsAiThinking { get => _isAiThinking; set { _isAiThinking = value; OnPropertyChanged(); } }
+
+        // Властивості для Монетки
+        public bool IsCoinTossVisible { get => _isCoinTossVisible; set { _isCoinTossVisible = value; OnPropertyChanged(); } }
+        public bool IsFlipping { get => _isFlipping; set { _isFlipping = value; OnPropertyChanged(); } }
+        public string CoinText { get => _coinText; set { _coinText = value; OnPropertyChanged(); } }
+        public string TossStatusText { get => _tossStatusText; set { _tossStatusText = value; OnPropertyChanged(); } }
 
         public MainViewModel()
         {
@@ -63,20 +65,19 @@ namespace InfiniteTicTacToe.ViewModels
             _gameTimer.Tick += (s, e) => { _secondsElapsed++; TimerText = TimeSpan.FromSeconds(_secondsElapsed).ToString(@"mm\:ss"); };
 
             MakeMoveCommand = new RelayCommand(ExecuteMakeMove);
-
-            StartCommand = new RelayCommand(
-                o => { _isPlaying = true; _gameTimer.Start(); UpdatePlayerInfo(); },
-                o => !string.IsNullOrWhiteSpace(Player1Name) && !string.IsNullOrWhiteSpace(Player2Name)
-            );
-
+            StartCommand = new RelayCommand(o => StartGame(), o => CanStart());
             PauseCommand = new RelayCommand(o => { _isPlaying = false; _gameTimer.Stop(); });
             ResetCommand = new RelayCommand(o => ResetGame());
         }
+
+        private bool CanStart() => !string.IsNullOrWhiteSpace(Player1Name) && !string.IsNullOrWhiteSpace(Player2Name) && !IsCoinTossVisible;
+        private void OnPlayerNamesChanged() => CommandManager.InvalidateRequerySuggested();
 
         private void ResetGame()
         {
             _gameTimer.Stop();
             _isPlaying = false;
+            _isAiThinking = false;
             _secondsElapsed = 0;
             TimerText = "00:00";
             DrawnCells.Clear();
@@ -86,16 +87,74 @@ namespace InfiniteTicTacToe.ViewModels
             PlayerColor = "#7f8fa6";
         }
 
+        private void StartGame()
+        {
+            if (IsAiMode)
+            {
+                ResetGame();
+                _isPlaying = true;
+                _gameTimer.Start();
+                UpdatePlayerInfo();
+                _ = ExecuteAiMove();
+            }
+            else
+            {
+                // Якщо 2 гравці - запускаємо монетку
+                _ = PerformCoinToss();
+            }
+        }
+
+        private async Task PerformCoinToss()
+        {
+            ResetGame();
+            CommandManager.InvalidateRequerySuggested();
+
+            IsCoinTossVisible = true;
+            IsFlipping = true;
+            CoinText = "?";
+            TossStatusText = "Підкидаємо монетку...";
+
+            SystemSounds.Beep.Play();
+            await Task.Delay(2000); // Монетка крутиться 2 секунди
+
+            IsFlipping = false;
+
+            Random rnd = new Random();
+            bool player1Wins = rnd.Next(2) == 0;
+
+            if (player1Wins)
+            {
+                CoinText = "Орел";
+                TossStatusText = $"Переміг {Player1Name}! (X)";
+                _currentPlayer = PlayerType.Cross;
+            }
+            else
+            {
+                CoinText = "Решка";
+                TossStatusText = $"Переміг {Player2Name}! (X)";
+                _currentPlayer = PlayerType.Zero;
+            }
+
+            SystemSounds.Asterisk.Play();
+            await Task.Delay(2500); // Показуємо результат 2.5 секунди
+
+            IsCoinTossVisible = false;
+            _isPlaying = true;
+            _gameTimer.Start();
+            UpdatePlayerInfo();
+            CommandManager.InvalidateRequerySuggested();
+        }
+
         private async void ExecuteMakeMove(object parameter)
         {
-            if (!_isPlaying) return;
+            if (!_isPlaying || IsAiThinking) return;
 
             if (parameter is Point clickPoint)
             {
                 int x = (int)Math.Floor(clickPoint.X / Cell.CellSize);
                 int y = (int)Math.Floor(clickPoint.Y / Cell.CellSize);
 
-                if (x < 0 || x >= GridWidth || y < 0 || y >= GridHeight) return;
+                if (x < 0 || x >= 3 || y < 0 || y >= 3) return;
 
                 if (_gameEngine.GetCell(x, y) == PlayerType.None)
                 {
@@ -104,36 +163,89 @@ namespace InfiniteTicTacToe.ViewModels
                     _gameEngine.MakeMove(x, y, _currentPlayer);
                     DrawnCells.Add(new Cell(x, y, _currentPlayer));
 
-                    var winningCells = _gameEngine.GetWinningCells(x, y, _currentPlayer);
-                    if (winningCells != null)
-                    {
-                        _gameTimer.Stop();
-                        _isPlaying = false;
-                        SystemSounds.Asterisk.Play();
-
-                        foreach (var wCell in winningCells)
-                        {
-                            var cellToUpdate = DrawnCells.FirstOrDefault(c => c.X == wCell.Item1 && c.Y == wCell.Item2);
-                            if (cellToUpdate != null) cellToUpdate.IsWinningCell = true;
-                        }
-
-                        string winnerName = _currentPlayer == PlayerType.Cross ? Player1Name : Player2Name;
-                        await Task.Delay(500);
-
-                        Application.Current.Dispatcher.Invoke(() =>
-                        {
-                            var victoryWindow = new VictoryWindow(winnerName) { Owner = Application.Current.MainWindow };
-                            victoryWindow.ShowDialog();
-                        });
-
-                        ResetGame();
-                        return;
-                    }
+                    if (CheckEndGame(x, y)) return;
 
                     _currentPlayer = _currentPlayer == PlayerType.Cross ? PlayerType.Zero : PlayerType.Cross;
                     UpdatePlayerInfo();
+
+                    if (IsAiMode)
+                    {
+                        await ExecuteAiMove();
+                    }
                 }
             }
+        }
+
+        private async Task ExecuteAiMove()
+        {
+            IsAiThinking = true;
+            await Task.Delay(500);
+
+            var aiMove = _gameEngine.GetAiMove(PlayerType.Cross, PlayerType.Zero);
+
+            if (aiMove != null)
+            {
+                SystemSounds.Beep.Play();
+                int x = aiMove.Item1;
+                int y = aiMove.Item2;
+
+                _gameEngine.MakeMove(x, y, PlayerType.Cross);
+                DrawnCells.Add(new Cell(x, y, PlayerType.Cross));
+
+                if (!CheckEndGame(x, y))
+                {
+                    _currentPlayer = PlayerType.Zero;
+                    UpdatePlayerInfo();
+                }
+            }
+
+            IsAiThinking = false;
+        }
+
+        private bool CheckEndGame(int lastX, int lastY)
+        {
+            var winningCells = _gameEngine.GetWinningCells(lastX, lastY, _currentPlayer);
+            if (winningCells != null)
+            {
+                EndGame(winningCells);
+                return true;
+            }
+
+            if (DrawnCells.Count >= 9)
+            {
+                EndGame(null, true);
+                return true;
+            }
+
+            return false;
+        }
+
+        private void EndGame(System.Collections.Generic.List<Tuple<int, int>> winningCells, bool isDraw = false)
+        {
+            _gameTimer.Stop();
+            _isPlaying = false;
+            SystemSounds.Asterisk.Play();
+
+            if (!isDraw && winningCells != null)
+            {
+                foreach (var wCell in winningCells)
+                {
+                    var cellToUpdate = DrawnCells.FirstOrDefault(c => c.X == wCell.Item1 && c.Y == wCell.Item2);
+                    if (cellToUpdate != null) cellToUpdate.IsWinningCell = true;
+                }
+            }
+
+            string winnerName = isDraw ? "Нічия" : (_currentPlayer == PlayerType.Cross ? Player1Name : Player2Name);
+            if (!isDraw && _currentPlayer == PlayerType.Zero) winnerName = Player2Name;
+            if (!isDraw && _currentPlayer == PlayerType.Cross) winnerName = Player1Name;
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                var victoryWindow = new VictoryWindow(winnerName, isDraw) { Owner = Application.Current.MainWindow };
+                victoryWindow.ShowDialog();
+            });
+
+            ResetGame();
         }
 
         private void UpdatePlayerInfo()

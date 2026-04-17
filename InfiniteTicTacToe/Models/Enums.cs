@@ -4,6 +4,6 @@
     {
         None,
         Cross,
-        Zero    
+        Zero
     }
 }

@@ -9,115 +9,201 @@
         <vm:MainViewModel/>
     </Window.DataContext>
 
-    <DockPanel>
-        <Border DockPanel.Dock="Right" Width="260" Background="#2f3640" BorderBrush="#111" BorderThickness="3,0,0,0">
-            <StackPanel Margin="15">
-                <TextBlock Text="КЕРУВАННЯ" Foreground="White" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,20"/>
-                <TextBlock Text="Час гри:" Foreground="#dcdde1" FontSize="14"/>
-                <TextBlock Text="{Binding TimerText}" Foreground="#fbc531" FontSize="42" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,5,0,20"/>
+    <Grid>
+        <DockPanel>
+            <Border DockPanel.Dock="Right" Width="260" Background="#2f3640" BorderBrush="#111" BorderThickness="3,0,0,0">
+                <StackPanel Margin="15">
+                    <TextBlock Text="КЕРУВАННЯ" Foreground="White" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,0,0,20"/>
 
-                <TextBlock Text="Імена гравців:" Foreground="#dcdde1" FontSize="14" Margin="0,0,0,5"/>
-                <TextBox Text="{Binding Player1Name, UpdateSourceTrigger=PropertyChanged}" Background="#1e272e" Foreground="#e84118" FontSize="14" Padding="5" Margin="0,0,0,10" BorderBrush="#e84118"/>
-                <TextBox Text="{Binding Player2Name, UpdateSourceTrigger=PropertyChanged}" Background="#1e272e" Foreground="#00a8ff" FontSize="14" Padding="5" Margin="0,0,0,20" BorderBrush="#00a8ff"/>
+                    <TextBlock Text="Час гри:" Foreground="#dcdde1" FontSize="14"/>
+                    <TextBlock Text="{Binding TimerText}" Foreground="#fbc531" FontSize="42" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,5,0,20"/>
 
-                <Button Content="СТАРТ" Command="{Binding StartCommand}" Height="45" Background="#44bd32" Foreground="White" FontWeight="Bold" FontSize="16" Margin="0,5"/>
-                <Button Content="ПАУЗА" Command="{Binding PauseCommand}" Height="45" Background="#e1b12c" Foreground="White" FontWeight="Bold" FontSize="16" Margin="0,5"/>
-                <Button Content="СКИДАННЯ" Command="{Binding ResetCommand}" Height="45" Background="#e84118" Foreground="White" FontWeight="Bold" FontSize="16" Margin="0,5"/>
+                    <TextBlock Text="Режим гри:" Foreground="#dcdde1" FontSize="14" Margin="0,0,0,5"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,15">
+                        <RadioButton Content="1 гравець" IsChecked="{Binding GameMode, Converter={vm:StringMatchesConverter}, ConverterParameter='1 гравець'}" Foreground="White" Margin="10,0" FontSize="14"/>
+                        <RadioButton Content="2 гравці" IsChecked="{Binding GameMode, Converter={vm:StringMatchesConverter}, ConverterParameter='2 гравці'}" Foreground="White" Margin="10,0" FontSize="14"/>
+                    </StackPanel>
 
-                <Separator Margin="0,20" Background="#485460"/>
-                <TextBlock Text="Черга ходу:" Foreground="#dcdde1" FontSize="14"/>
-                <Border Height="70" CornerRadius="10" Background="#1e272e" Margin="0,10" BorderBrush="{Binding PlayerColor}" BorderThickness="2">
-                    <TextBlock Text="{Binding CurrentPlayerStatus}" Foreground="{Binding PlayerColor}" 
-                               FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </Border>
-            </StackPanel>
-        </Border>
+                    <TextBlock Text="Імена гравців:" Foreground="#dcdde1" FontSize="14" Margin="0,0,0,5"/>
+                    <TextBox Text="{Binding Player1Name, UpdateSourceTrigger=PropertyChanged}" Background="#1e272e" Foreground="#e84118" FontSize="14" Padding="5" Margin="0,0,0,10" BorderBrush="#e84118">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsAiMode}" Value="True">
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                        <Setter Property="Text" Value="Комп'ютер (AI)"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <TextBox Text="{Binding Player2Name, UpdateSourceTrigger=PropertyChanged}" Background="#1e272e" Foreground="#00a8ff" FontSize="14" Padding="5" Margin="0,0,0,20" BorderBrush="#00a8ff"/>
 
-        <Grid x:Name="GameGrid" ClipToBounds="True" Background="#1e272e" MouseWheel="Grid_MouseWheel">
-            <Canvas x:Name="MainCanvas">
-                <Canvas.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform x:Name="CanvasScale" ScaleX="1" ScaleY="1"/>
-                        <TranslateTransform x:Name="CanvasTranslate" X="0" Y="0"/>
-                    </TransformGroup>
-                </Canvas.RenderTransform>
+                    <Button Content="СТАРТ" Command="{Binding StartCommand}" Height="45" Background="#44bd32" Foreground="White" FontWeight="Bold" FontSize="16" Margin="0,5">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="IsEnabled" Value="True"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter Property="Opacity" Value="0.5"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <Button Content="ПАУЗА" Command="{Binding PauseCommand}" Height="45" Background="#e1b12c" Foreground="White" FontWeight="Bold" FontSize="16" Margin="0,5"/>
+                    <Button Content="СКИДАННЯ" Command="{Binding ResetCommand}" Height="45" Background="#e84118" Foreground="White" FontWeight="Bold" FontSize="16" Margin="0,5"/>
 
-                <Border x:Name="GameBoard" Width="750" Height="750" 
-                        Background="#222f3e" BorderBrush="#111" BorderThickness="3"
-                        MouseLeftButtonDown="Grid_MouseLeftButtonDown" 
-                        MouseLeftButtonUp="Grid_MouseLeftButtonUp" 
-                        MouseMove="Grid_MouseMove">
-                    <Border.Effect>
-                        <DropShadowEffect ShadowDepth="5" BlurRadius="15" Opacity="0.5"/>
-                    </Border.Effect>
+                    <Separator Margin="0,20" Background="#485460"/>
 
-                    <Grid>
-                        <Grid.Background>
-                            <VisualBrush TileMode="Tile" Viewport="0,0,50,50" ViewportUnits="Absolute">
-                                <VisualBrush.Visual>
-                                    <Path Data="M 50,0 L 0,0 0,50" Stroke="#485460" StrokeThickness="1"/>
-                                </VisualBrush.Visual>
-                            </VisualBrush>
-                        </Grid.Background>
+                    <TextBlock Text="Черга ходу:" Foreground="#dcdde1" FontSize="14"/>
+                    <Border Height="70" CornerRadius="10" Background="#1e272e" Margin="0,10" BorderBrush="{Binding PlayerColor}" BorderThickness="2">
+                        <TextBlock Text="{Binding CurrentPlayerStatus}" Foreground="{Binding PlayerColor}" FontSize="22" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </StackPanel>
+            </Border>
 
-                        <ItemsControl ItemsSource="{Binding DrawnCells}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <Canvas/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ItemContainerStyle>
-                                <Style TargetType="ContentPresenter">
-                                    <Setter Property="Canvas.Left" Value="{Binding CanvasX}"/>
-                                    <Setter Property="Canvas.Top" Value="{Binding CanvasY}"/>
-                                </Style>
-                            </ItemsControl.ItemContainerStyle>
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Border Width="48" Height="48" CornerRadius="8" Margin="1">
-                                        <Border.Style>
-                                            <Style TargetType="Border">
-                                                <Setter Property="Background" Value="#2f3640"/>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding IsWinningCell}" Value="True">
-                                                        <Setter Property="Background" Value="#f1c40f"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </Border.Style>
-                                        <ContentControl Content="{Binding Player}" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                            <ContentControl.Style>
-                                                <Style TargetType="ContentControl">
+            <Grid x:Name="GameGrid" ClipToBounds="True" Background="#1e272e" MouseWheel="Grid_MouseWheel">
+                <Canvas x:Name="MainCanvas">
+                    <Canvas.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform x:Name="CanvasScale" ScaleX="1" ScaleY="1"/>
+                            <TranslateTransform x:Name="CanvasTranslate" X="0" Y="0"/>
+                        </TransformGroup>
+                    </Canvas.RenderTransform>
+
+                    <Border x:Name="GameBoard" Width="150" Height="150" Background="#222f3e" BorderBrush="#111" BorderThickness="3" MouseLeftButtonDown="Grid_MouseLeftButtonDown" MouseLeftButtonUp="Grid_MouseLeftButtonUp" MouseMove="Grid_MouseMove">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="5" BlurRadius="15" Opacity="0.5"/>
+                        </Border.Effect>
+                        <Grid>
+                            <Grid.Background>
+                                <VisualBrush TileMode="Tile" Viewport="0,0,50,50" ViewportUnits="Absolute">
+                                    <VisualBrush.Visual>
+                                        <Path Data="M 50,0 L 0,0 0,50" Stroke="#485460" StrokeThickness="1"/>
+                                    </VisualBrush.Visual>
+                                </VisualBrush>
+                            </Grid.Background>
+                            <ItemsControl ItemsSource="{Binding DrawnCells}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <Canvas/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemContainerStyle>
+                                    <Style TargetType="ContentPresenter">
+                                        <Setter Property="Canvas.Left" Value="{Binding CanvasX}"/>
+                                        <Setter Property="Canvas.Top" Value="{Binding CanvasY}"/>
+                                    </Style>
+                                </ItemsControl.ItemContainerStyle>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Width="48" Height="48" CornerRadius="8" Margin="1">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Setter Property="Background" Value="#2f3640"/>
                                                     <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding Player}" Value="Cross">
-                                                            <Setter Property="Template">
-                                                                <Setter.Value>
-                                                                    <ControlTemplate>
-                                                                        <Path Stroke="#e84118" StrokeThickness="5" Data="M 10,10 L 38,38 M 38,10 L 10,38" StrokeEndLineCap="Round" StrokeStartLineCap="Round"/>
-                                                                    </ControlTemplate>
-                                                                </Setter.Value>
-                                                            </Setter>
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding Player}" Value="Zero">
-                                                            <Setter Property="Template">
-                                                                <Setter.Value>
-                                                                    <ControlTemplate>
-                                                                        <Ellipse Stroke="#00a8ff" StrokeThickness="5" Width="30" Height="30"/>
-                                                                    </ControlTemplate>
-                                                                </Setter.Value>
-                                                            </Setter>
+                                                        <DataTrigger Binding="{Binding IsWinningCell}" Value="True">
+                                                            <Setter Property="Background" Value="#f1c40f"/>
                                                         </DataTrigger>
                                                     </Style.Triggers>
                                                 </Style>
-                                            </ContentControl.Style>
-                                        </ContentControl>
-                                    </Border>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </Grid>
-                </Border>
-            </Canvas>
+                                            </Border.Style>
+                                            <ContentControl Content="{Binding Player}" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <ContentControl.Style>
+                                                    <Style TargetType="ContentControl">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding Player}" Value="Cross">
+                                                                <Setter Property="Template">
+                                                                    <Setter.Value>
+                                                                        <ControlTemplate>
+                                                                            <Path Stroke="#e84118" StrokeThickness="5" Data="M 10,10 L 38,38 M 38,10 L 10,38" StrokeEndLineCap="Round" StrokeStartLineCap="Round"/>
+                                                                        </ControlTemplate>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Player}" Value="Zero">
+                                                                <Setter Property="Template">
+                                                                    <Setter.Value>
+                                                                        <ControlTemplate>
+                                                                            <Ellipse Stroke="#00a8ff" StrokeThickness="5" Width="30" Height="30"/>
+                                                                        </ControlTemplate>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </ContentControl.Style>
+                                            </ContentControl>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Grid>
+                    </Border>
+                </Canvas>
+            </Grid>
+        </DockPanel>
+
+        <Grid Background="#E61e272e" Panel.ZIndex="100">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsCoinTossVisible}" Value="True">
+                            <Setter Property="Visibility" Value="Visible"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                <ContentControl Margin="0,0,0,50">
+                    <ContentControl.Template>
+                        <ControlTemplate TargetType="ContentControl">
+                            <Border Width="160" Height="160" CornerRadius="80" Background="#f1c40f" BorderBrush="#e67e22" BorderThickness="8" RenderTransformOrigin="0.5,0.5">
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="25" ShadowDepth="15" Opacity="0.6"/>
+                                </Border.Effect>
+
+                                <Border.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform x:Name="CoinScale" ScaleX="1" ScaleY="1" />
+                                        <TranslateTransform x:Name="CoinTranslate" X="0" Y="0" />
+                                    </TransformGroup>
+                                </Border.RenderTransform>
+
+                                <TextBlock Text="{Binding CoinText}" Foreground="#b33939" FontSize="36" FontWeight="Black" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+
+                            <ControlTemplate.Triggers>
+                                <DataTrigger Binding="{Binding IsFlipping}" Value="True">
+                                    <DataTrigger.EnterActions>
+                                        <BeginStoryboard Name="FlipAnim">
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="CoinScale" Storyboard.TargetProperty="ScaleY" From="1" To="-1" Duration="0:0:0.15" AutoReverse="True" RepeatBehavior="Forever"/>
+                                                <DoubleAnimation Storyboard.TargetName="CoinTranslate" Storyboard.TargetProperty="Y" From="0" To="-80" Duration="0:0:0.4" AutoReverse="True" RepeatBehavior="Forever"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.EnterActions>
+                                    <DataTrigger.ExitActions>
+                                        <StopStoryboard BeginStoryboardName="FlipAnim"/>
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <DoubleAnimation Storyboard.TargetName="CoinScale" Storyboard.TargetProperty="ScaleY" To="1" Duration="0:0:0.2"/>
+                                                <DoubleAnimation Storyboard.TargetName="CoinTranslate" Storyboard.TargetProperty="Y" To="0" Duration="0:0:0.2"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </DataTrigger.ExitActions>
+                                </DataTrigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </ContentControl.Template>
+                </ContentControl>
+
+                <TextBlock Text="{Binding TossStatusText}" Foreground="White" FontSize="28" FontWeight="Bold" HorizontalAlignment="Center"/>
+            </StackPanel>
         </Grid>
-    </DockPanel>
+    </Grid>
 </Window>

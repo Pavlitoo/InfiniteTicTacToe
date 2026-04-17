@@ -2,6 +2,8 @@
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Data; // Не забудь додати
+using System.Globalization; // Не забудь додати
 using InfiniteTicTacToe.ViewModels;
 
 namespace InfiniteTicTacToe
@@ -19,6 +21,7 @@ namespace InfiniteTicTacToe
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
+            // Автоматичне центрування дошки при запуску
             CanvasTranslate.X = (GameGrid.ActualWidth - GameBoard.Width) / 2;
             CanvasTranslate.Y = (GameGrid.ActualHeight - GameBoard.Height) / 2;
         }
@@ -42,6 +45,7 @@ namespace InfiniteTicTacToe
             {
                 if (DataContext is MainViewModel vm)
                 {
+                    // Точний клік відносно самої дошки
                     Point clickOnBoard = e.GetPosition(GameBoard);
                     vm.MakeMoveCommand.Execute(clickOnBoard);
                 }
@@ -62,11 +66,26 @@ namespace InfiniteTicTacToe
         private void Grid_MouseWheel(object sender, MouseWheelEventArgs e)
         {
             double zoomFactor = e.Delta > 0 ? 1.1 : 0.9;
-            if (CanvasScale.ScaleX * zoomFactor > 0.2 && CanvasScale.ScaleX * zoomFactor < 5.0)
+            if (CanvasScale.ScaleX * zoomFactor > 0.3 && CanvasScale.ScaleX * zoomFactor < 5.0)
             {
                 CanvasScale.ScaleX *= zoomFactor;
                 CanvasScale.ScaleY *= zoomFactor;
             }
+        }
+    }
+
+    // --- НОВИЙ ДОПОМІЖНИЙ КЛАС-КОНВЕРТЕР (У цьому ж файлі, або окремо) ---
+    // Необхідний для роботи RadioButton у режимі MVVM
+    public class StringMatchesConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value?.ToString() == parameter?.ToString();
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return (bool)value ? parameter?.ToString() : Binding.DoNothing;
         }
     }
 }
