@@ -28,6 +28,7 @@ namespace InfiniteTicTacToe.ViewModels
         private string _currentPlayerStatus = "Очікування...";
         private string _playerColor = "#7f8fa6";
         private string _gameMode = "2 гравці";
+        private string _pauseButtonText = "ПАУЗА";
 
         private bool _isCoinTossVisible;
         private bool _isFlipping;
@@ -46,10 +47,11 @@ namespace InfiniteTicTacToe.ViewModels
         public string CurrentPlayerStatus { get => _currentPlayerStatus; set { _currentPlayerStatus = value; OnPropertyChanged(); } }
         public string PlayerColor { get => _playerColor; set { _playerColor = value; OnPropertyChanged(); } }
         public string GameMode { get => _gameMode; set { _gameMode = value; OnPropertyChanged(); OnPlayerNamesChanged(); } }
+        public string PauseButtonText { get => _pauseButtonText; set { _pauseButtonText = value; OnPropertyChanged(); } }
+
         public bool IsAiMode => GameMode == "1 гравець";
         public bool IsAiThinking { get => _isAiThinking; set { _isAiThinking = value; OnPropertyChanged(); } }
 
-        // Властивості для Монетки
         public bool IsCoinTossVisible { get => _isCoinTossVisible; set { _isCoinTossVisible = value; OnPropertyChanged(); } }
         public bool IsFlipping { get => _isFlipping; set { _isFlipping = value; OnPropertyChanged(); } }
         public string CoinText { get => _coinText; set { _coinText = value; OnPropertyChanged(); } }
@@ -66,12 +68,28 @@ namespace InfiniteTicTacToe.ViewModels
 
             MakeMoveCommand = new RelayCommand(ExecuteMakeMove);
             StartCommand = new RelayCommand(o => StartGame(), o => CanStart());
-            PauseCommand = new RelayCommand(o => { _isPlaying = false; _gameTimer.Stop(); });
+            PauseCommand = new RelayCommand(o => TogglePause());
             ResetCommand = new RelayCommand(o => ResetGame());
         }
 
         private bool CanStart() => !string.IsNullOrWhiteSpace(Player1Name) && !string.IsNullOrWhiteSpace(Player2Name) && !IsCoinTossVisible;
         private void OnPlayerNamesChanged() => CommandManager.InvalidateRequerySuggested();
+
+        private void TogglePause()
+        {
+            if (_isPlaying)
+            {
+                _isPlaying = false;
+                _gameTimer.Stop();
+                PauseButtonText = "ПРОДОВЖИТИ";
+            }
+            else if (!_isPlaying && _secondsElapsed > 0 && !IsCoinTossVisible)
+            {
+                _isPlaying = true;
+                _gameTimer.Start();
+                PauseButtonText = "ПАУЗА";
+            }
+        }
 
         private void ResetGame()
         {
@@ -80,6 +98,7 @@ namespace InfiniteTicTacToe.ViewModels
             _isAiThinking = false;
             _secondsElapsed = 0;
             TimerText = "00:00";
+            PauseButtonText = "ПАУЗА";
             DrawnCells.Clear();
             _gameEngine.ClearBoard();
             _currentPlayer = PlayerType.Cross;
@@ -99,7 +118,6 @@ namespace InfiniteTicTacToe.ViewModels
             }
             else
             {
-                // Якщо 2 гравці - запускаємо монетку
                 _ = PerformCoinToss();
             }
         }
@@ -115,7 +133,7 @@ namespace InfiniteTicTacToe.ViewModels
             TossStatusText = "Підкидаємо монетку...";
 
             SystemSounds.Beep.Play();
-            await Task.Delay(2000); // Монетка крутиться 2 секунди
+            await Task.Delay(2000);
 
             IsFlipping = false;
 
@@ -125,18 +143,18 @@ namespace InfiniteTicTacToe.ViewModels
             if (player1Wins)
             {
                 CoinText = "Орел";
-                TossStatusText = $"Переміг {Player1Name}! (X)";
+                TossStatusText = $"Першим ходить {Player1Name}!";
                 _currentPlayer = PlayerType.Cross;
             }
             else
             {
                 CoinText = "Решка";
-                TossStatusText = $"Переміг {Player2Name}! (X)";
+                TossStatusText = $"Першим ходить {Player2Name}!";
                 _currentPlayer = PlayerType.Zero;
             }
 
             SystemSounds.Asterisk.Play();
-            await Task.Delay(2500); // Показуємо результат 2.5 секунди
+            await Task.Delay(2500);
 
             IsCoinTossVisible = false;
             _isPlaying = true;
@@ -220,7 +238,7 @@ namespace InfiniteTicTacToe.ViewModels
             return false;
         }
 
-        private void EndGame(System.Collections.Generic.List<Tuple<int, int>> winningCells, bool isDraw = false)
+        private async void EndGame(System.Collections.Generic.List<Tuple<int, int>> winningCells, bool isDraw = false)
         {
             _gameTimer.Stop();
             _isPlaying = false;
@@ -234,6 +252,9 @@ namespace InfiniteTicTacToe.ViewModels
                     if (cellToUpdate != null) cellToUpdate.IsWinningCell = true;
                 }
             }
+
+            // Додана затримка в 3 секунди, щоб встигнути зробити скріншот!
+            await Task.Delay(3000);
 
             string winnerName = isDraw ? "Нічия" : (_currentPlayer == PlayerType.Cross ? Player1Name : Player2Name);
             if (!isDraw && _currentPlayer == PlayerType.Zero) winnerName = Player2Name;

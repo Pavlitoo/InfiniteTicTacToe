@@ -51,7 +51,9 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    <Button Content="ПАУЗА" Command="{Binding PauseCommand}" Height="45" Background="#e1b12c" Foreground="White" FontWeight="Bold" FontSize="16" Margin="0,5"/>
+
+                    <Button Content="{Binding PauseButtonText}" Command="{Binding PauseCommand}" Height="45" Background="#e1b12c" Foreground="White" FontWeight="Bold" FontSize="16" Margin="0,5"/>
+
                     <Button Content="СКИДАННЯ" Command="{Binding ResetCommand}" Height="45" Background="#e84118" Foreground="White" FontWeight="Bold" FontSize="16" Margin="0,5"/>
 
                     <Separator Margin="0,20" Background="#485460"/>
